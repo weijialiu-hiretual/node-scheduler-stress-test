@@ -8,19 +8,21 @@ async function doTest(threadId) {
   for (let i = 0; i < 100; i++) {
 
     try {
-      const result = await fetch('http://localhost:5555/api/schedule', {
+      const result = await fetch('http://nodescheduler.api.testhtm/api/schedule', {
         method: 'POST',
         headers: {
           'User-Agent': '',
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          "queue": "stress-test",
-          "url": "http://localhost:3000/callback",
-          "args": {"thread": `thread-${threadId}-${i}`},
-          "headers": {},
-          "options": {},
-          "additionalOptions": {}
+          queue: "stress-test",
+          url: "http://10.100.7.107:3000/callback",
+          args: {
+            thread: `thread-${threadId}`, task: `task-${i}`
+          },
+          headers: {},
+          options: {},
+          additionalOptions: {}
         })
       });
       rightCount++;
@@ -35,7 +37,7 @@ async function doTest(threadId) {
 
 async function main() {
   const promises = [];
-  for (let i = 0; i < 125; i++) {
+  for (let i = 0; i < 50; i++) {
     promises.push(doTest(i));
   }
   await Promise.all(promises);
