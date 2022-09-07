@@ -23,8 +23,13 @@ async function doTest(threadId) {
           additionalOptions: {}
         })
       });
-      rightCount++;
-      console.log(`[✔️] WrongRate=${(wrongCount / (wrongCount + rightCount) * 100).toFixed(2)}% thread-${threadId}, task-${i}`);
+      if (result.ok) {
+        rightCount++;
+        console.log(`[✔️] WrongRate=${(wrongCount / (wrongCount + rightCount) * 100).toFixed(2)}% thread-${threadId}, task-${i}`);
+      } else {
+        wrongCount++;
+        console.log(`[❌] WrongRate=${(wrongCount / (wrongCount + rightCount) * 100).toFixed(2)}% thread-${threadId}, task-${i}`);
+      }
     } catch (e) {
       wrongCount++;
       console.log(`[❌] WrongRate=${(wrongCount / (wrongCount + rightCount) * 100).toFixed(2)}% thread-${threadId}, task-${i}`);
