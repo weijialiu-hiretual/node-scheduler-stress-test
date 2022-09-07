@@ -12,12 +12,12 @@ app.get('/', (req, res) => {
 })
 
 app.post('/callback', async (req, res) =>{
-  try {
-    const reqBody = req.body;
-    console.log(reqBody);
-  } catch (e) {
-    console.log(e);
-  }
+  // try {
+  //   const reqBody = req.body;
+  //   console.log(reqBody);
+  // } catch (e) {
+  //   console.log(e);
+  // }
   res.status(200).json({message: "success"});
 });
 
