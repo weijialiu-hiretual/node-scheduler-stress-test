@@ -2,10 +2,13 @@ const fetch = require("node-fetch");
 
 let rightCount = 0;
 let wrongCount = 0;
+let totalCount = 100000;
+let concurrency = 50;
+let loopCount = totalCount / concurrency;
 
 async function doTest(threadId) {
 
-  for (let i = 0; i < 100; i++) {
+  for (let i = 0; i < loopCount; i++) {
 
     try {
       const result = await fetch('http://nodescheduler.api.testhtm/api/schedule', {
@@ -40,7 +43,7 @@ async function doTest(threadId) {
 
 async function main() {
   const promises = [];
-  for (let i = 0; i < 1000; i++) {
+  for (let i = 0; i < concurrency; i++) {
     promises.push(doTest(i));
   }
   await Promise.all(promises);

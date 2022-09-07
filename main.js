@@ -12,6 +12,7 @@ app.get('/', (req, res) => {
 })
 
 app.post('/callback', async (req, res) =>{
+  console.log('callback');
   // try {
   //   const reqBody = req.body;
   //   console.log(reqBody);
