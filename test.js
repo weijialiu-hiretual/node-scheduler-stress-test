@@ -25,10 +25,10 @@ async function doTest(threadId) {
       });
       if (result.ok) {
         rightCount++;
-        console.log(`[✔️] WrongRate=${(wrongCount / (wrongCount + rightCount) * 100).toFixed(2)}% thread-${threadId}, task-${i}`);
+        console.log(`[✔️]${result.status} WrongRate=${(wrongCount / (wrongCount + rightCount) * 100).toFixed(2)}% thread-${threadId}, task-${i}`);
       } else {
         wrongCount++;
-        console.log(`[❌] WrongRate=${(wrongCount / (wrongCount + rightCount) * 100).toFixed(2)}% thread-${threadId}, task-${i}`);
+        console.log(`[❌]${result.status} WrongRate=${(wrongCount / (wrongCount + rightCount) * 100).toFixed(2)}% thread-${threadId}, task-${i}`);
       }
     } catch (e) {
       wrongCount++;
@@ -40,7 +40,7 @@ async function doTest(threadId) {
 
 async function main() {
   const promises = [];
-  for (let i = 0; i < 800; i++) {
+  for (let i = 0; i < 1000; i++) {
     promises.push(doTest(i));
   }
   await Promise.all(promises);
