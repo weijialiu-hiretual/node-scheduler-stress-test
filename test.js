@@ -16,10 +16,8 @@ async function doTest(threadId) {
         },
         body: JSON.stringify({
           queue: "stress-test",
-          url: "http://10.100.7.107:3000/callback",
-          args: {
-            thread: `thread-${threadId}`, task: `task-${i}`
-          },
+          url: "http://emailserver.api.testhtm/callback/test",
+          args: {},
           headers: {},
           options: {},
           additionalOptions: {}
@@ -37,7 +35,7 @@ async function doTest(threadId) {
 
 async function main() {
   const promises = [];
-  for (let i = 0; i < 50; i++) {
+  for (let i = 0; i < 800; i++) {
     promises.push(doTest(i));
   }
   await Promise.all(promises);
